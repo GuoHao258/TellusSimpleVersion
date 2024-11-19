@@ -1,2 +1,0 @@
-# TellusUI
-TellusUI
