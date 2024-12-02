@@ -7,56 +7,51 @@ function Login({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate API call to authenticate the user
-    try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    // 模拟成功登录，使用硬编码的用户数据
+    const mockUserData = {
+      name: 'Test User', // 硬编码的用户姓名
+      id: 1,             // 硬编码的用户 ID
+      email: email       // 使用输入的邮箱作为显示用途
+    };
 
-      if (!response.ok) throw new Error('Invalid login credentials');
-
-      const userData = await response.json();
-      onLogin(userData); // Pass user info to parent component
-    } catch (error) {
-      alert(error.message);
-    }
+    // 调用传入的 onLogin 方法，传递模拟用户数据
+    onLogin(mockUserData);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">Login</h2>
+      <form onSubmit={handleSubmit} className="card max-w-sm">
+        <h2 className="card-title">Login</h2>
         <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Email</label>
+          <label className="label">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            className="input"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Password</label>
+          <label className="label">Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            className="input"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          className="btn-primary w-full"
         >
           Login
         </button>
       </form>
     </div>
   );
+  
 }
 
 export default Login;

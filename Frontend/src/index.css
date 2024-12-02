@@ -2,16 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.btn {
+  @apply px-4 py-2 rounded-lg transition-all;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.btn-nav {
+  @apply btn text-blue-500 hover:text-blue-700;
+}
+
+.btn-danger {
+  @apply btn bg-red-500 text-white hover:bg-red-600;
+}
+
+.container {
+  @apply mx-auto p-6 max-w-7xl;
+}
+
+.card {
+  @apply bg-white p-6 rounded-lg shadow-md w-full;
+}
+.card-title {
+  @apply text-2xl font-bold mb-4 text-center text-gray-700;
+}
+.label {
+  @apply block text-gray-600 mb-2;
+}
+.input {
+  @apply w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300;
+}
+.btn-primary {
+  @apply bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all;
+}
+
+.btn-generate {
+  @apply bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-all;
+}
+
+
+/* 全局样式类用于 AvatarCreationUI 组件 */
+/* 容器样式 */
+.container-default {
+  @apply p-6 bg-white shadow-md rounded-lg mb-6;
+}
+
+/* 上传区域的容器 */
+.upload-container {
+  @apply border border-gray-300 p-6 rounded-lg mb-6;
+}
+
+/* 上传标题样式 */
+.upload-title {
+  @apply text-lg font-medium mb-4 text-center;
+}
+
+/* 上传占位符的样式 */
+.preview-placeholder {
+  @apply w-72 h-48 bg-gray-200 mx-auto flex items-center justify-center rounded-lg;
+}
+
+/* 上传字段的通用样式 */
+.input-file-label {
+  @apply block mb-2 text-gray-700 font-medium;
+}
+
+.input-file {
+  @apply block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mt-2;
+}
+
+/* 生成按钮的样式 */
+.btn-generate {
+  @apply px-6 py-3 mt-4 text-white font-bold rounded-lg;
+}
+
+.btn-generate-default {
+  @apply bg-blue-500 hover:bg-blue-600;
+}
+
+.btn-generate-disabled {
+  @apply bg-blue-400 cursor-not-allowed;
+}
+
+/* 状态文本样式 */
+.status-text {
+  @apply text-center mt-4 text-gray-700;
+}
+
+
+
+
+
+/* 全局样式类用于 GenerateInterview 组件 */
+
+/* 容器样式 */
+.container-generate {
+  @apply flex min-h-screen p-6;
+}
+
+/* 视频部分的样式 */
+.video-container {
+  @apply w-1/2 p-4;
+}
+
+.video-title {
+  @apply text-xl font-bold mb-4;
+}
+
+.video {
+  @apply w-full h-auto rounded-lg;
+}
+
+/* 问题输入部分的样式 */
+.question-container {
+  @apply w-1/2 p-4;
+}
+
+.file-input {
+  @apply mb-4 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100;
+}
+
+.input-field {
+  @apply w-full border p-2 rounded mb-2;
+}
+
+.button-add-question {
+  @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all;
+}
+
+.button-confirm {
+  @apply bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-all;
 }

@@ -121,8 +121,24 @@ Fetch API: For making API requests.
 To install all dependencies:
 ```bash
   {
-    npm install react-router-dom tailwindcss postcss autoprefixe
+    npm install react-router-dom tailwindcss postcss autoprefixer
   }
+  
+### **更新点说明**
+
+1. **新增页面功能描述**：
+   - 添加了 **Generate Interview** 页面描述，包括如何生成面试视频。
+   - 指定了每个组件的用途，包括 `Login.js`、`AvatarCreationUI.js`、`GenerateInterview.js`、`MyAvatar.js` 等。
+
+2. **更新全局 Tailwind CSS 使用**：
+   - 详细描述了在 `index.css` 中如何使用 `@apply` 指令创建全局类，方便复用。
+   - 添加了示例类，包括 `container-generate`、`video-container`、`button-add-question`、`button-confirm` 等。
+
+3. **添加了对新功能的 API 需求**：
+   - 更新了登录、生成 Avatar、查看 Avatar 和生成面试视频的 API 调用需求。
+
+4. **文件结构说明**：
+   - 明确了每个文件的功能，帮助开发者理解整个项目的结构。
 
 ## Next Steps for Backend Developer
 Implement the required API endpoints (/login, /generate-avatar, /my-avatars).
