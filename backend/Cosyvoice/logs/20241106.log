@@ -1,0 +1,25 @@
+2024-11-06 01:05:13,395 - cosyAPI - ERROR - Exception on /clone_and_generate_video [POST]
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "cosyAPI.py", line 246, in clone_and_generate_video
+    clone_model = CosyVoice('pretrained_models/CosyVoice - 300M')
+  File "D:\Projects\FYP\Cosyvoice\cosyvoice\cli\cosyvoice.py", line 30, in __init__
+    model_dir = snapshot_download(model_dir)
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\modelscope\hub\snapshot_download.py", line 84, in snapshot_download
+    return _snapshot_download(
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\modelscope\hub\snapshot_download.py", line 220, in _snapshot_download
+    revision_detail = _api.get_valid_revision_detail(
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\modelscope\hub\api.py", line 499, in get_valid_revision_detail
+    all_branches_detail, all_tags_detail = self.get_model_branches_and_tags_details(
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\modelscope\hub\api.py", line 584, in get_model_branches_and_tags_details
+    handle_http_response(r, logger, cookies, model_id)
+  File "D:\miniconda3\envs\cosyvoice\lib\site-packages\modelscope\hub\errors.py", line 118, in handle_http_response
+    raise HTTPError(http_error_msg, response=response)
+requests.exceptions.HTTPError: The request model: pretrained_models/CosyVoice - 300M does not exist!

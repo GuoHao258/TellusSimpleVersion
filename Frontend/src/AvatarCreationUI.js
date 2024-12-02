@@ -49,7 +49,7 @@ function AvatarCreationUI({ userId }) {
 
       const result = await response.json();
       setAvatarPreview(result.video_url);
-      setGenerationStatus('Congrats！Your generation is successful！');
+      setGenerationStatus('Congrat!Your generation is successful!');
     } catch (error) {
       alert('】Error when generating your avatar! Please try agin');
     } finally {
