@@ -59,7 +59,7 @@ app.post('/login', (req, res) => {
 function executePythonScript(scriptPath) {
   return new Promise((resolve, reject) => {
       //const pythonProcess = spawn('python', [scriptPath]);
-      const pythonProcess = spawn('python', [scriptPath], {
+      const pythonProcess = spawn('D:\\Python\\Python311\\python', [scriptPath], {
         cwd: path.join(__dirname, 'Cosyvoice')
     });
     
@@ -83,8 +83,6 @@ function executePythonScript(scriptPath) {
       });
   });
 }
-
-// 处理POST /run-python-script请求的路由，用于测试执行Python脚本
 
 // 处理POST /generate-avatar请求的路由，用于执行Python脚本并处理返回结果
 app.post('/generate-avatar', (req, res) => {
@@ -114,6 +112,54 @@ app.post('/generate-avatar', (req, res) => {
           return res.status(500).json(error);
       });
 });
+
+// 新增处理POST /generate-avatar-q的路由
+app.post('/generate-avatar-q', (req, res) => {
+    const pythonScriptPath = path.join(__dirname, 'Cosyvoice', 'clone_q.py');
+  
+    // 从请求中获取问题
+    const { questions } = req.body;
+  
+    if (!questions || typeof questions !== 'string') {
+      return res.status(400).json({ error: "缺少问题参数或参数格式不正确" });
+    }
+  
+    // 调用Python脚本并传递问题参数
+    const pythonProcess = spawn('D:\\Python\\Python311\\python', [pythonScriptPath, questions], {
+      cwd: path.join(__dirname, 'Cosyvoice')
+    });
+  
+    let pythonOutput = '';
+    pythonProcess.stdout.on('data', (data) => {
+      pythonOutput += data.toString();
+    });
+  
+    pythonProcess.stderr.on('data', (data) => {
+      console.error('Python脚本错误:', data.toString());
+    });
+  
+    pythonProcess.on('close', (code) => {
+      if (code === 0) {
+        try {
+          const outputData = JSON.parse(pythonOutput);
+          const video_path = outputData.video_path;
+          if (video_path) {
+            const videoUrl = `http://localhost:${port}/${path.basename(video_path)}`;
+            console.log(videoUrl);
+            res.setHeader('Content-Type', 'video/mp4');
+            return res.json({ video_url: videoUrl });
+          } else {
+            return res.status(400).json({ error: "Python脚本返回的结果中未包含视频路径信息" });
+          }
+        } catch (jsonError) {
+          return res.status(500).json({ error: "解析Python脚本输出的JSON数据出错", details: jsonError.message });
+        }
+      } else {
+        return res.status(500).json({ error: "Python脚本执行失败", details: `退出码: ${code}` });
+      }
+    });
+  });
+  
 
 // 处理GET /my-avatars请求的路由
 app.get('/my-avatars', (req, res) => {
@@ -153,8 +199,6 @@ app.post('/generate-avatar1', (req, res) => {
         cwd: path.join(__dirname, 'backend', 'Cosyvoice')
     });
     
-
-
       let pythonOutput = '';
       pythonProcess.stdout.on('data', (data) => {
           pythonOutput += data;

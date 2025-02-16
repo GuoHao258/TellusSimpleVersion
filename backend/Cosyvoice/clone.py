@@ -9,6 +9,7 @@ API_URL = "http://127.0.0.1:9233"
 #print("trump.wav文件的绝对路径:", os.path.abspath('trump.wav'))
 # 参考音频文件路径（这里假设你有一个本地的音频文件用于参考音色，你需要根据实际情况修改）
 reference_audio_path = "trump.wav"
+#reference_audio_path = "en2.wav"
 # 检查文件是否存在
 if os.path.exists(reference_audio_path):
     #print(f"文件 {reference_audio_path} 存在.")
@@ -20,13 +21,17 @@ if os.path.exists(reference_audio_path):
         print(f"打开文件时发生错误: {e}")
 
 # 要合成的文本
-text_to_synthesize = "Hello! I am your avatar, and I'm here to assist you with your interview."#
+text_to_synthesize = "Please introduce yourself and tell me about your last work experience."#
+#text_to_synthesize = "Do you have any questions about this position? Please feel free to ask me questions."
 
 # 参考文本（与参考音频对应）
 reference_text = "Politicians are all talk, no action. Nothing's gonna get done. They will not bring us, believe me, to the promised land."
+#reference_text = "Constant attack by politicians who have no medical education or background and who do not know the women that their"
+#reference_text = "He's near South Side. I'm honored to represent a district made up largely of working people and I'm proud to tell you that I come from a family of work."
 
 # 要用于sadtalker的图像路径（根据实际情况修改）
 image_path = "D:\Projects\FYP\TellusSimpleVersion\\backend\Cosyvoice\\trump2.jpg"
+#image_path = "D:\Projects\FYP\TellusSimpleVersion\\backend\Cosyvoice\\women.png"
 
 # 设置请求参数
 data = {

@@ -146,7 +146,14 @@ def batch(tts_type,outname,params):
     if tts_type!='tts':
         if not params['reference_audio'] or not os.path.exists(f"{root_dir}/{params['reference_audio']}"):
             raise Exception(f'参考音频未传入或不存在 {params["reference_audio"]}')
-        prompt_speech_16k = load_wav(params['reference_audio'], 16000)
+        # prompt_speech_16k = load_wav(params['reference_audio'], 16000)
+        try:
+            prompt_speech_16k = load_wav(params['reference_audio'], 16000)
+        except Exception as e:
+            print(f"Error loading reference audio file: {e}")
+            # 你可以选择返回合适的错误信息或执行其他处理
+            return make_response(jsonify({"code": 500, "msg": f"Error loading reference audio: {str(e)}"}), 500)
+
     for i,t in enumerate(text):
         if not t.strip():
             continue
@@ -254,7 +261,8 @@ def clone_and_generate_video():
         sadtalker_cmd = [
             "D:\Projects\FYP\TellusSimpleVersion\\backend\SadTalker\python\python", "inference.py",
             "--driven_audio", audio_path,
-            "--source_image", image_path
+            "--source_image", image_path,
+            "--still"
         ]
 
         # 运行sadtalker命令

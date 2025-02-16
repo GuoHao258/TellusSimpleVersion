@@ -45,3 +45,16 @@ def load_wav(wav, target_sr):
         assert sample_rate > target_sr, 'wav sample rate {} must be greater than {}'.format(sample_rate, target_sr)
         speech = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=target_sr)(speech)
     return speech
+
+def load_wav(wav, target_sr):
+    try:
+        with open(wav, 'rb') as f:  # 以二进制模式打开文件
+            speech, sample_rate = torchaudio.load(f)
+            speech = speech.mean(dim=0, keepdim=True)
+            if sample_rate != target_sr:
+                assert sample_rate > target_sr, f"wav sample rate {sample_rate} must be greater than {target_sr}"
+                speech = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=target_sr)(speech)
+            return speech
+    except Exception as e:
+        print(f"Error loading wav file: {e}")
+        return None
